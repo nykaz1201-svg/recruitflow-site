@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="AIと話すだけでキャリアが整理され、正直なマッチング、面接・ケース面接対策、市場情報まで。エージェントに握られない、あなた側のキャリアツール。">
-<meta name="theme-color" content="#1f4e8c">
+<meta name="theme-color" content="#26456a">
 <title>RecruitFlow — 自分のキャリアを、自分の手に。</title>
 <style>
   :root{
     --ink:#161d2b; --ink2:#3a4657; --muted:#727d8c;
-    --paper:#f6f4ef; --surface:#ffffff; --line:#e7e3d9; --line2:#efece4;
-    --blue:#1f4e8c; --blue-soft:#e9eff8; --green:#2c7a43; --green-soft:#e7f3ea;
+    --paper:#f4f1e9; --surface:#ffffff; --line:#e7e3d9; --line2:#efece4;
+    --blue:#26456a; --blue-soft:#eceef3; --green:#2c7a43; --green-soft:#e7f3ea;
     --coral:#d9603a; --coral-soft:#fbeae2; --amber:#9a6a12;
     --shadow:0 1px 2px rgba(22,29,43,.05), 0 14px 40px rgba(22,29,43,.07);
     --serif:"Hiragino Mincho ProN","Yu Mincho","YuMincho",serif;
@@ -21,7 +21,7 @@
       --line:#28303d; --line2:#20262f; --blue:#7aa8e8; --blue-soft:#152439; --green:#6ece8f; --green-soft:#13291d;
       --coral:#e58a67; --coral-soft:#2b1a12; --amber:#d6a55f; --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 44px rgba(0,0,0,.4); }
   }
-  :root[data-theme="light"]{ --ink:#161d2b; --ink2:#3a4657; --muted:#727d8c; --paper:#f6f4ef; --surface:#fff; --line:#e7e3d9; --line2:#efece4; --blue:#1f4e8c; --blue-soft:#e9eff8; --green:#2c7a43; --green-soft:#e7f3ea; --coral:#d9603a; --coral-soft:#fbeae2; --shadow:0 1px 2px rgba(22,29,43,.05),0 14px 40px rgba(22,29,43,.07); }
+  :root[data-theme="light"]{ --ink:#161d2b; --ink2:#3a4657; --muted:#727d8c; --paper:#f4f1e9; --surface:#fff; --line:#e7e3d9; --line2:#efece4; --blue:#26456a; --blue-soft:#eceef3; --green:#2c7a43; --green-soft:#e7f3ea; --coral:#d9603a; --coral-soft:#fbeae2; --shadow:0 1px 2px rgba(22,29,43,.05),0 14px 40px rgba(22,29,43,.07); }
   :root[data-theme="dark"]{ --ink:#eef1f6; --ink2:#c2ccd9; --muted:#8b96a6; --paper:#10141c; --surface:#171d28; --line:#28303d; --line2:#20262f; --blue:#7aa8e8; --blue-soft:#152439; --green:#6ece8f; --green-soft:#13291d; --coral:#e58a67; --coral-soft:#2b1a12; --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 44px rgba(0,0,0,.4); }
 
   *{ box-sizing:border-box; }
@@ -31,9 +31,9 @@
   h1,h2,h3{ line-height:1.3; letter-spacing:.01em; text-wrap:balance; margin:0; }
   .serif{ font-family:var(--serif); font-weight:600; }
   .eyebrow{ font-size:12px; font-weight:700; letter-spacing:.18em; color:var(--blue); text-transform:uppercase; }
-  .btn{ display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:15px; padding:13px 26px; border-radius:999px; cursor:pointer; border:1px solid transparent; transition:transform .12s ease, box-shadow .12s ease; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; font-weight:600; font-size:15px; letter-spacing:.02em; padding:14px 30px; border-radius:999px; cursor:pointer; border:1px solid transparent; transition:transform .18s ease, box-shadow .18s ease; }
   .btn:hover{ transform:translateY(-1px); }
-  .btn-primary{ background:var(--blue); color:#fff; box-shadow:0 8px 22px rgba(31,78,140,.28); }
+  .btn-primary{ background:var(--blue); color:#fff; box-shadow:0 6px 18px rgba(38,69,106,.22); }
   .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--line); }
   @media(prefers-reduced-motion:reduce){ .btn:hover{ transform:none; } .reveal{ opacity:1 !important; transform:none !important; } }
 
@@ -97,8 +97,9 @@
   .tag{ font-size:11px; font-weight:600; padding:4px 10px; border-radius:999px; background:var(--green-soft); color:var(--green); }
 
   /* Sections */
-  section{ padding:66px 0; }
-  .sec-head{ text-align:center; max-width:640px; margin:0 auto 40px; }
+  section{ padding:88px 0; }
+  .sec-head{ text-align:center; max-width:640px; margin:0 auto 52px; }
+  .sec-head h2::after{ content:""; display:block; width:34px; height:1px; background:var(--blue); opacity:.5; margin:18px auto 0; }
   .sec-head h2{ font-size:clamp(24px,3.6vw,34px); margin:10px 0 12px; }
   .sec-head p{ color:var(--ink2); font-size:15px; }
 
@@ -112,8 +113,9 @@
   .feat{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
   @media(max-width:760px){ .feat{ grid-template-columns:1fr; } }
   .card{ background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:26px; box-shadow:var(--shadow); }
-  .card .ico{ font-size:24px; }
-  .card h3{ font-size:18px; margin:12px 0 8px; }
+  .card .ico{ display:none; }
+  .card h3{ font-size:18px; margin:0 0 10px; padding-top:16px; position:relative; letter-spacing:.02em; }
+  .card h3::before{ content:""; position:absolute; top:0; left:0; width:26px; height:1.5px; border-radius:2px; background:var(--blue); opacity:.65; }
   .card p{ font-size:14px; color:var(--ink2); margin:0; }
   .card.span2{ grid-column:1 / -1; display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:center; }
   @media(max-width:760px){ .card.span2{ grid-template-columns:1fr; } }
@@ -226,9 +228,10 @@
   .pillx{ font-size:11.5px; font-weight:600; padding:5px 12px; border-radius:999px; background:var(--blue-soft); color:var(--blue); }
 
   /* Pain cards */
-  .pain{ background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:24px; box-shadow:var(--shadow); }
-  .pain .em{ font-size:26px; }
-  .pain b{ display:block; font-size:16px; margin:10px 0 7px; }
+  .pain{ background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:28px 26px; box-shadow:var(--shadow); }
+  .pain .em{ display:none; }
+  .pain b{ display:block; font-size:16.5px; margin:0 0 9px; padding-top:16px; position:relative; letter-spacing:.02em; }
+  .pain b::before{ content:""; position:absolute; top:0; left:0; width:26px; height:1.5px; border-radius:2px; background:var(--blue); opacity:.65; }
   .pain p{ font-size:13.5px; color:var(--ink2); margin:0; line-height:1.75; }
   /* Comparison */
   .cmp-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); }
