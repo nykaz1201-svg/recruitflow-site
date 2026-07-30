@@ -244,6 +244,26 @@
   .cmp tbody tr:last-child td{ border-bottom:none; }
   .cmp .x{ color:#b0442e; } .cmp .o{ color:var(--green); font-weight:700; }
 
+  /* Mobile 最適化 */
+  @media(max-width:600px){
+    .hero{ padding:40px 0 20px; }
+    section{ padding:54px 0; }
+    .sec-head{ margin-bottom:34px; }
+    .sec-head h2::after{ margin-top:14px; }
+    .hero-cta{ flex-direction:column; align-items:stretch; }
+    .hero-cta .btn{ width:100%; justify-content:center; }
+    .appwin3{ margin-top:26px; }
+    .w3-panel,.w3-chat{ padding:14px; }
+    .w3-voice{ padding:22px 14px; }
+    .w3-chat{ min-height:180px; }
+    .orb.big{ width:108px; height:108px; }
+    .pain{ padding:22px 20px; }
+    .cmp{ min-width:500px; }
+    .cmp th,.cmp td{ padding:12px 12px; font-size:12.5px; }
+    .card,.step{ padding:20px; }
+    .plan{ padding:24px; }
+  }
+
   .reveal{ opacity:0; transform:translateY(14px); animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards; }
   @keyframes rise{ to{ opacity:1; transform:none; } }
 </style>
