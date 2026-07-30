@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="AIと話すだけでキャリアが整理され、面接・ケース面接対策、定期的なマーケット情報まで。自分のペースで、自分の市場価値を。">
+<meta name="theme-color" content="#1f4e8c">
+<title>RecruitFlow — 自分のキャリアを、自分の手に。</title>
+<style>
+  :root{
+    --ink:#161d2b; --ink2:#3a4657; --muted:#727d8c;
+    --paper:#f6f4ef; --surface:#ffffff; --line:#e7e3d9; --line2:#efece4;
+    --blue:#1f4e8c; --blue-soft:#e9eff8; --green:#2c7a43; --green-soft:#e7f3ea;
+    --coral:#d9603a; --coral-soft:#fbeae2; --amber:#9a6a12;
+    --shadow:0 1px 2px rgba(22,29,43,.05), 0 14px 40px rgba(22,29,43,.07);
+    --serif:"Hiragino Mincho ProN","Yu Mincho","YuMincho",serif;
+    --sans:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --ink:#eef1f6; --ink2:#c2ccd9; --muted:#8b96a6; --paper:#10141c; --surface:#171d28;
+      --line:#28303d; --line2:#20262f; --blue:#7aa8e8; --blue-soft:#152439; --green:#6ece8f; --green-soft:#13291d;
+      --coral:#e58a67; --coral-soft:#2b1a12; --amber:#d6a55f; --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 44px rgba(0,0,0,.4); }
+  }
+  :root[data-theme="light"]{ --ink:#161d2b; --ink2:#3a4657; --muted:#727d8c; --paper:#f6f4ef; --surface:#fff; --line:#e7e3d9; --line2:#efece4; --blue:#1f4e8c; --blue-soft:#e9eff8; --green:#2c7a43; --green-soft:#e7f3ea; --coral:#d9603a; --coral-soft:#fbeae2; --shadow:0 1px 2px rgba(22,29,43,.05),0 14px 40px rgba(22,29,43,.07); }
+  :root[data-theme="dark"]{ --ink:#eef1f6; --ink2:#c2ccd9; --muted:#8b96a6; --paper:#10141c; --surface:#171d28; --line:#28303d; --line2:#20262f; --blue:#7aa8e8; --blue-soft:#152439; --green:#6ece8f; --green-soft:#13291d; --coral:#e58a67; --coral-soft:#2b1a12; --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 44px rgba(0,0,0,.4); }
+
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.8; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 24px; }
+  a{ color:inherit; text-decoration:none; }
+  h1,h2,h3{ line-height:1.3; letter-spacing:.01em; text-wrap:balance; margin:0; }
+  .serif{ font-family:var(--serif); font-weight:600; }
+  .eyebrow{ font-size:12px; font-weight:700; letter-spacing:.18em; color:var(--blue); text-transform:uppercase; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:15px; padding:13px 26px; border-radius:999px; cursor:pointer; border:1px solid transparent; transition:transform .12s ease, box-shadow .12s ease; }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn-primary{ background:var(--blue); color:#fff; box-shadow:0 8px 22px rgba(31,78,140,.28); }
+  .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--line); }
+  @media(prefers-reduced-motion:reduce){ .btn:hover{ transform:none; } .reveal{ opacity:1 !important; transform:none !important; } }
+
+  /* Nav */
+  nav{ position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--paper) 88%, transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line2); }
+  .nav-in{ display:flex; align-items:center; justify-content:space-between; height:62px; }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.02em; }
+  .logo{ width:26px; height:26px; border-radius:8px; background:linear-gradient(140deg,var(--blue),var(--green)); }
+  .nav-links{ display:flex; align-items:center; gap:26px; font-size:13.5px; color:var(--ink2); }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-cta{ font-size:13.5px; font-weight:700; padding:8px 16px; border-radius:999px; background:var(--ink); color:var(--paper); }
+  @media(max-width:720px){ .nav-links{ display:none; } }
+
+  /* Hero */
+  .hero{ padding:70px 0 40px; position:relative; overflow:hidden; }
+  .hero::before{ content:""; position:absolute; right:-10%; top:-20%; width:60%; height:120%; background:radial-gradient(closest-side, var(--blue-soft), transparent 72%); opacity:.9; z-index:0; }
+  .hero-center{ text-align:center; max-width:820px; margin:0 auto; position:relative; z-index:1; }
+  .hero h1{ font-size:clamp(27px,4.3vw,42px); margin:16px 0 18px; word-break:keep-all; line-break:strict; }
+  @media(max-width:400px){ .hero h1{ font-size:24px; } }
+  .hero h1 .hl{ color:var(--blue); }
+  .hero .lead{ font-size:clamp(15px,2.2vw,18px); color:var(--ink2); max-width:560px; margin:0 auto; }
+  .hero-cta{ display:flex; gap:12px; flex-wrap:wrap; margin-top:26px; justify-content:center; }
+  .trust{ margin-top:16px; font-size:12.5px; color:var(--muted); display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+
+  /* Full-width 3-pane app window（実プロダクトに忠実） */
+  .appwin3{ background:#0f1420; border:1px solid #222c3c; border-radius:18px; box-shadow:var(--shadow); overflow:hidden; margin-top:42px; position:relative; z-index:1; }
+  .w3-bar{ display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid #222c3c; }
+  .w3-left{ display:flex; align-items:center; }
+  .brandmini{ color:#8aa4d8; font-weight:800; font-size:13px; letter-spacing:.02em; }
+  .test{ font-size:10px; color:#8fd3a6; border:1px solid #2f6a45; border-radius:6px; padding:1px 6px; margin-left:8px; }
+  .w3-title{ background:#1a2233; border:1px solid #2a3448; color:#cdd6e6; font-size:12.5px; padding:7px 14px; border-radius:10px; }
+  .w3-right{ color:#7f8ca3; font-size:12px; }
+  .w3-body{ display:grid; grid-template-columns:1fr 1fr 1fr; }
+  .w3-panel{ padding:18px; border-right:1px solid #1c2534; }
+  .w3-chat{ padding:18px; display:flex; flex-direction:column; min-height:460px; }
+  .w3-chat .msgs{ flex:1; }
+  .w3-input{ display:flex; align-items:center; gap:9px; background:#161d2b; border:1px solid #28324a; border-radius:12px; padding:9px 11px; }
+  .micdot{ color:#7f8ca3; font-size:14px; }
+  .w3-input .ph{ flex:1; color:#6b7688; font-size:12px; }
+  .w3-input .send{ background:#2f6fd0; color:#fff; font-size:12px; font-weight:700; padding:6px 13px; border-radius:9px; }
+  .w3-voice{ padding:16px; border-left:1px solid #1c2534; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:16px; }
+  .w3-voice p{ color:#9aa6b8; font-size:12.5px; line-height:1.7; }
+  .orb.big{ width:150px; height:150px; }
+  .orb-cta.big{ font-size:13px; padding:11px 22px; }
+  @media(max-width:860px){
+    .w3-body{ grid-template-columns:1fr; }
+    .w3-panel{ border-right:none; border-bottom:1px solid #1c2534; }
+    .w3-voice{ border-left:none; border-top:1px solid #1c2534; }
+    .w3-chat{ min-height:210px; }
+  }
+  .trust span{ display:inline-flex; align-items:center; gap:5px; }
+
+  /* Chat mock */
+  .mock{ background:var(--surface); border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow); padding:18px; }
+  .mock-hd{ display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); padding-bottom:12px; border-bottom:1px solid var(--line2); margin-bottom:14px; }
+  .dot{ width:9px; height:9px; border-radius:50%; }
+  .bub{ max-width:82%; padding:11px 14px; border-radius:16px; font-size:13.5px; margin-bottom:10px; line-height:1.7; }
+  .bub.ai{ background:var(--blue-soft); color:var(--ink); border-bottom-left-radius:5px; }
+  .bub.me{ background:var(--ink); color:var(--paper); margin-left:auto; border-bottom-right-radius:5px; }
+  .tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+  .tag{ font-size:11px; font-weight:600; padding:4px 10px; border-radius:999px; background:var(--green-soft); color:var(--green); }
+
+  /* Sections */
+  section{ padding:66px 0; }
+  .sec-head{ text-align:center; max-width:640px; margin:0 auto 40px; }
+  .sec-head h2{ font-size:clamp(24px,3.6vw,34px); margin:10px 0 12px; }
+  .sec-head p{ color:var(--ink2); font-size:15px; }
+
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media(max-width:760px){ .steps{ grid-template-columns:1fr; } }
+  .step{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px; box-shadow:var(--shadow); }
+  .step .n{ font-family:var(--serif); font-size:34px; color:var(--blue); line-height:1; }
+  .step h3{ font-size:17px; margin:12px 0 6px; }
+  .step p{ font-size:13.5px; color:var(--ink2); margin:0; }
+
+  .feat{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media(max-width:760px){ .feat{ grid-template-columns:1fr; } }
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:26px; box-shadow:var(--shadow); }
+  .card .ico{ font-size:24px; }
+  .card h3{ font-size:18px; margin:12px 0 8px; }
+  .card p{ font-size:14px; color:var(--ink2); margin:0; }
+  .card.span2{ grid-column:1 / -1; display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:center; }
+  @media(max-width:760px){ .card.span2{ grid-template-columns:1fr; } }
+
+  /* match mock */
+  .match{ background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:16px; }
+  .match-row{ display:flex; align-items:center; justify-content:space-between; padding:9px 0; border-top:1px solid var(--line2); font-size:13px; }
+  .match-row:first-of-type{ border-top:none; }
+  .pct{ font-weight:800; font-variant-numeric:tabular-nums; }
+  .bar{ height:6px; border-radius:3px; background:var(--line2); overflow:hidden; width:120px; }
+  .bar>i{ display:block; height:100%; border-radius:3px; }
+
+  /* Manifesto */
+  .manifesto{ background:var(--ink); color:var(--paper); }
+  .manifesto .wrap{ max-width:760px; text-align:center; }
+  .manifesto h2{ font-family:var(--serif); font-size:clamp(22px,3.4vw,32px); line-height:1.55; }
+  .manifesto .quote{ font-size:15px; color:#c9d2df; margin-top:22px; line-height:1.9; }
+
+  /* Pricing */
+  .price{ display:grid; grid-template-columns:repeat(2,minmax(0,360px)); justify-content:center; gap:18px; align-items:stretch; }
+  @media(max-width:820px){ .price{ grid-template-columns:minmax(0,420px); } }
+  .plan{ background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:28px; box-shadow:var(--shadow); display:flex; flex-direction:column; }
+  .plan.feature{ border:2px solid var(--blue); position:relative; }
+  .plan .badge{ position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--blue); color:#fff; font-size:11px; font-weight:700; padding:4px 12px; border-radius:999px; }
+  .plan h3{ font-size:16px; }
+  .plan .amt{ font-family:var(--serif); font-size:38px; margin:10px 0 2px; }
+  .plan .amt small{ font-size:14px; color:var(--muted); font-family:var(--sans); }
+  .plan ul{ list-style:none; padding:0; margin:16px 0 22px; }
+  .plan li{ font-size:13.5px; color:var(--ink2); padding:6px 0 6px 24px; position:relative; }
+  .plan li::before{ content:"✓"; position:absolute; left:0; color:var(--green); font-weight:800; }
+  .plan .btn{ margin-top:auto; justify-content:center; }
+  .fee-note{ text-align:center; font-size:13px; color:var(--muted); margin-top:20px; }
+
+  /* FAQ */
+  .faq{ max-width:760px; margin:0 auto; }
+  details{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:6px 20px; margin-bottom:12px; }
+  summary{ cursor:pointer; font-weight:700; font-size:15px; padding:14px 0; list-style:none; display:flex; justify-content:space-between; align-items:center; }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{ content:"+"; color:var(--blue); font-size:20px; font-weight:400; }
+  details[open] summary::after{ content:"−"; }
+  details p{ margin:0 0 16px; font-size:14px; color:var(--ink2); }
+
+  /* Final + footer */
+  .final{ text-align:center; }
+  .final .box{ background:linear-gradient(150deg, var(--blue-soft), var(--surface)); border:1px solid var(--line); border-radius:24px; padding:56px 24px; box-shadow:var(--shadow); }
+  .final h2{ font-family:var(--serif); font-size:clamp(24px,4vw,38px); }
+  footer{ border-top:1px solid var(--line2); padding:30px 0 60px; color:var(--muted); font-size:12.5px; }
+  .foot-in{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+
+  /* App window mock (faithful to the real dark product screen) */
+  .appwin{ background:#0f1420; border:1px solid #222c3c; border-radius:20px; box-shadow:var(--shadow); padding:15px; }
+  .win-bar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+  .win-pill{ background:#1a2233; border:1px solid #2a3448; color:#cdd6e6; font-size:12px; padding:8px 13px; border-radius:11px; }
+  .win-mic{ color:#7f8ca3; font-size:14px; }
+  .wb{ max-width:88%; padding:9px 13px; border-radius:14px; font-size:12.5px; margin-bottom:9px; line-height:1.65; }
+  .wb.ai{ background:#1a2740; color:#dbe6f7; border-bottom-left-radius:4px; }
+  .wb.me{ background:#2f6fd0; color:#fff; margin-left:auto; border-bottom-right-radius:4px; }
+  .orb-row{ display:flex; align-items:center; gap:11px; justify-content:center; margin:12px 0 2px; }
+  .orb{ width:46px; height:46px; border-radius:50%; background-color:#0f1420;
+    background-image:radial-gradient(#6478 1.1px, transparent 1.3px); background-size:6px 6px;
+    -webkit-mask:radial-gradient(circle at 50% 50%, #000 58%, transparent 70%); mask:radial-gradient(circle at 50% 50%, #000 58%, transparent 70%);
+    box-shadow:inset 0 0 22px rgba(122,168,232,.25); }
+  .orb-cta{ background:#2f6fd0; color:#fff; font-size:12px; font-weight:700; padding:8px 15px; border-radius:999px; }
+  .win-split{ text-align:center; font-size:11px; color:#8492a8; margin:13px 0; letter-spacing:.05em; }
+  .win-panel{ background:#131a28; border:1px solid #222c3c; border-radius:14px; padding:15px; }
+  .wp-label{ font-size:10.5px; color:#7f8ca3; font-weight:700; letter-spacing:.06em; margin:12px 0 7px; }
+  .wp-label:first-child{ margin-top:0; }
+  .wp-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+  .wp-tags span{ font-size:11px; background:#1a2740; color:#a9c2ea; padding:4px 11px; border-radius:999px; }
+  .wp-list{ margin:0; padding-left:17px; }
+  .wp-list li{ font-size:12px; color:#cdd6e6; margin:4px 0; line-height:1.55; }
+  .wp-match{ margin-top:13px; background:#0f1929; border:1px solid #24406b; border-radius:12px; padding:13px; }
+  .wp-mtitle{ color:#7aa8e8; font-weight:700; font-size:13px; margin-top:5px; }
+  .wp-sal{ color:#6ece8f; font-size:12px; margin-top:4px; }
+
+  /* Interview / case-interview window mock (dark) */
+  .ivwin{ background:#0f1420; border:1px solid #222c3c; border-radius:16px; padding:14px; box-shadow:var(--shadow); }
+  .iv-bar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+  .iv-topic{ background:#131a28; border:1px solid #24406b; border-radius:12px; padding:13px; margin-bottom:12px; }
+  .iv-topic-l{ font-size:10.5px; color:#7f8ca3; font-weight:700; letter-spacing:.06em; }
+  .iv-topic-t{ color:#dbe6f7; font-size:13.5px; font-weight:600; margin:5px 0 9px; line-height:1.55; }
+  .iv-timer{ display:inline-block; font-size:11px; color:#e0b06a; background:#241d0e; border:1px solid #4a3a12; border-radius:999px; padding:3px 11px; }
+  .ivwin .wb{ margin-bottom:8px; }
+  .ivwin .orb-row{ margin:12px 0 4px; }
+  .iv-voicehint{ text-align:center; font-size:10.5px; color:#7f8ca3; margin:0 0 10px; }
+  .ivwin .w3-input{ margin-top:2px; }
+
+  /* Interview report mock */
+  .report{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:var(--shadow); }
+  .rep-top{ display:flex; align-items:baseline; justify-content:space-between; font-size:13px; font-weight:700; color:var(--ink2); }
+  .rep-score{ font-family:var(--serif); font-size:34px; color:var(--green); }
+  .rep-score small{ font-family:var(--sans); font-size:13px; color:var(--muted); }
+  .rep-bar{ height:8px; border-radius:4px; background:var(--line2); overflow:hidden; margin:10px 0 16px; }
+  .rep-bar>i{ display:block; height:100%; border-radius:4px; background:linear-gradient(90deg,var(--green),#5bb075); }
+  .rep-sec{ font-size:12.5px; font-weight:700; margin:12px 0 4px; }
+  .rep-sec.good{ color:var(--green); }
+  .rep-sec.bad{ color:var(--coral); }
+  .report ul{ margin:0; padding-left:18px; }
+  .report li{ font-size:13px; color:var(--ink2); margin:3px 0; }
+  .tx-mini{ font-size:11px; color:var(--muted); }
+  .pill-row{ display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+  .pillx{ font-size:11.5px; font-weight:600; padding:5px 12px; border-radius:999px; background:var(--blue-soft); color:var(--blue); }
+
+  .reveal{ opacity:0; transform:translateY(14px); animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards; }
+  @keyframes rise{ to{ opacity:1; transform:none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <div class="brand"><span class="logo"></span>RecruitFlow</div>
+    <div class="nav-links">
+      <a href="#how">仕組み</a><a href="#features">できること</a><a href="#interview">面接対策</a><a href="#price">料金</a><a href="#faq">FAQ</a>
+    </div>
+    <a class="nav-cta" href="#price">無料ではじめる</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-center reveal">
+    <span class="eyebrow">AIキャリア・プラットフォーム</span>
+    <h1 class="serif">転職するかは、<br>まだ決めなくていい。<br><span class="hl">まず、自分を知ろう。</span></h1>
+    <p class="lead">あなたの市場価値と選択肢を、エージェントに握られず、自分のペースで。AIと少し話すだけで、あなたのキャリアが整理され、進める道が見えてきます。</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#price">無料でキャリアを整理する →</a>
+      <a class="btn btn-ghost" href="#how">仕組みを見る</a>
+    </div>
+    <div class="trust"><span>✓ クレジットカード不要</span><span>✓ 3分ではじめられる</span><span>✓ 日本語・英語対応</span></div>
+  </div>
+
+  <div class="wrap">
+    <div class="appwin3 reveal" style="animation-delay:.14s">
+      <div class="w3-bar">
+        <div class="w3-left"><span class="brandmini">RecruitFlow</span></div>
+        <div class="w3-title">💬 キャリア相談 ▾</div>
+        <div class="w3-right">終える</div>
+      </div>
+      <div class="w3-body">
+        <!-- 左：話すとリアルタイムで整理される -->
+        <div class="w3-panel">
+          <div class="wp-label">志向性（大事にしていること）</div>
+          <div class="wp-tags"><span>裁量の大きさ</span><span>成長できる環境</span></div>
+          <div class="wp-label">やりたいこと</div>
+          <ul class="wp-list"><li>0→1のプロダクト・事業づくり</li><li>チームのマネジメント</li></ul>
+          <div class="wp-label">希望する働き方</div>
+          <ul class="wp-list"><li>リモート中心のハイブリッド</li></ul>
+          <div class="wp-match">
+            <div class="wp-label" style="margin:0">マッチしそうなポジション</div>
+            <div class="wp-mtitle">プロダクトマネージャー</div>
+            <div class="wp-sal">想定年収 800〜1200万円</div>
+          </div>
+        </div>
+        <!-- 中央：会話＋入力 -->
+        <div class="w3-chat">
+          <div class="msgs">
+            <div class="wb ai">これまでで一番「手応えがあった」仕事は、どんな時でしたか？</div>
+            <div class="wb me">新しいサービスの立ち上げを任され、チームをまとめて形にした時ですね。</div>
+            <div class="wb ai">いいですね。その経験から、あなたの強みを整理していきますね。</div>
+          </div>
+          <div class="w3-input"><span class="micdot">🎙</span><span class="ph">メッセージを入力（Enterで送信）</span><span class="send">送信</span></div>
+        </div>
+        <!-- 右：音声 -->
+        <div class="w3-voice">
+          <span class="orb big"></span>
+          <p>会話で話すか、<br>チャットに入力してください</p>
+          <span class="orb-cta big">🎙 声で話す</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">How it works</span><h2 class="serif">話すだけで、キャリアが整う。</h2><p>面倒な入力も、気まずい面談もなし。3ステップで、自分の価値と選択肢が見えます。</p></div>
+    <div class="steps">
+      <div class="step reveal"><div class="n">01</div><h3>話す</h3><p>AIと自然に会話（音声もOK）。経歴書があれば読み込ませるだけ。転職未定でも大丈夫。</p></div>
+      <div class="step reveal" style="animation-delay:.08s"><div class="n">02</div><h3>整理される</h3><p>あなたの強み・実績・志向が、話すそばからタグや要約になって可視化されます。</p></div>
+      <div class="step reveal" style="animation-delay:.16s"><div class="n">03</div><h3>選択肢が見える</h3><p>あなたの経験が本当に活きる企業を、盛らずに正直に。現実的な想定年収とともに。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="features" style="background:var(--surface);border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Features</span><h2 class="serif">あなたの味方は、あなた側に。</h2><p>整理・診断・練習まで、必要なことは全部ここで。まずは自分のペースで。</p></div>
+    <div class="feat">
+      <div class="card span2 reveal" style="background:var(--paper)">
+        <div>
+          <div class="ico">🎯</div>
+          <h3>正直なマッチング</h3>
+          <p>企業の求人要件（必須／歓迎スキル・年収・NG）とあなたの経歴を突き合わせ、適合度を根拠付きで提示。誇張しない。合わないものは「合わない」と伝えます。</p>
+        </div>
+        <div class="match">
+          <div class="match-row"><span>急成長SaaS ／ エンジニアリングマネージャー</span><span class="pct" style="color:var(--green)">78%</span></div>
+          <div class="match-row"><div class="bar"><i style="width:78%;background:var(--green)"></i></div><span style="color:var(--muted);font-size:11px">即戦力・要件充足</span></div>
+          <div class="match-row"><span>コンサルティングファーム ／ ITコンサルタント</span><span class="pct" style="color:var(--green)">66%</span></div>
+          <div class="match-row"><div class="bar"><i style="width:66%;background:var(--green)"></i></div><span style="color:var(--muted);font-size:11px">歓迎要件を満たす</span></div>
+          <div class="match-row"><span>事業会社 ／ マーケティングマネージャー</span><span class="pct" style="color:var(--amber)">57%</span></div>
+          <div class="match-row"><div class="bar"><i style="width:57%;background:var(--amber)"></i></div><span style="color:var(--muted);font-size:11px">年収レンジ要確認</span></div>
+        </div>
+      </div>
+      <div class="card reveal"><div class="ico">🧭</div><h3>キャリアの棚卸し</h3><p>落ち着いた知的なAIと対話。経験・強み・大事にしていること・やりたいことが、話すだけで整理・保存されます。</p></div>
+      <div class="card reveal" style="animation-delay:.06s"><div class="ico">📈</div><h3>市場価値とマーケット情報</h3><p>あなたの市場価値を定期的にアップデート。職種・スキルの相場や求人の動きが見え、気になる企業に求人が出たら<strong>通知</strong>。転職していない時も、キャリアの"今"がわかります。<span class="tx-mini">（スタンダード）</span></p></div>
+      <div class="card reveal"><div class="ico">🕒</div><h3>いつでも続きから</h3><p>アカウントに保存。思い立った夜に少しだけ、でも続きから。あなたの市場価値は、あなたの手元に。</p></div>
+      <div class="card reveal" style="animation-delay:.06s"><div class="ico">🤝</div><h3>興味のある企業が見つかったら</h3><p>整理する中で「ここ、気になる」と思える企業が出てきたら、<strong>将来的にお繋ぎできるよう準備中</strong>です。今は自分のペースで整理と対策に集中できます。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="interview">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Interview prep</span><h2 class="serif">本番前に、何度でも。</h2><p>AIが面接官になって練習相手に。終わったら、点数と改善点まで返ってきます。</p></div>
+    <div class="feat">
+      <div class="card span2 reveal" style="background:var(--paper)">
+        <div>
+          <div class="ico">🎤</div>
+          <h3>面接・ケース面接対策</h3>
+          <p>AIが本番さながらの面接官に。志望動機・実績・逆質問などの<strong>一般面接</strong>も、お題に沿って考える<strong>ケース面接</strong>も、何度でも。音声でもテキストでも練習できます。</p>
+          <div class="pill-row">
+            <span class="pillx">一般面接</span><span class="pillx">ケース面接</span><span class="pillx">音声で練習</span><span class="pillx">職種を問わない</span>
+          </div>
+        </div>
+        <div class="ivwin">
+          <div class="iv-bar"><span class="w3-title">🎤 ケース面接 ▾</span><span class="w3-right">終える</span></div>
+          <div class="iv-topic">
+            <div class="iv-topic-l">お題</div>
+            <div class="iv-topic-t">ある地方のカフェチェーンの売上を、1年で20%伸ばすには？</div>
+            <span class="iv-timer">⏱ 考える時間 02:00</span>
+          </div>
+          <div class="wb ai">🔊 それでは、どこから考えていきますか？</div>
+          <div class="wb me">売上を「客数 × 客単価 × 来店頻度」に分解して…</div>
+          <div class="wb ai">🔊 良い切り口です。では客数を伸ばす施策は？</div>
+          <div class="orb-row"><span class="orb"></span><span class="orb-cta">🎙 声で回答する</span></div>
+          <div class="iv-voicehint">AIが声で問いかけ、あなたも声で回答できます</div>
+          <div class="w3-input"><span class="micdot">🎙</span><span class="ph">声で答える or 入力（Enter送信）</span><span class="send">送信</span></div>
+        </div>
+      </div>
+
+      <div class="card span2 reveal" style="background:var(--paper)">
+        <div class="report">
+          <div class="rep-top"><span>面接評価レポート</span><span class="rep-score">82<small> / 100</small></span></div>
+          <div class="rep-bar"><i style="width:82%"></i></div>
+          <div class="rep-sec good">◎ 良かった点</div>
+          <ul><li>結論ファーストで論理が明快</li><li>数字で具体的に説明できている</li></ul>
+          <div class="rep-sec bad">△ 改善点</div>
+          <ul><li>打ち手の優先順位づけが弱い</li><li>前提の置き方を一言添える</li></ul>
+        </div>
+        <div>
+          <div class="ico">📊</div>
+          <h3>終わったら、点数と改善点。</h3>
+          <p>練習が終わると、<strong>点数・良かった点・改善点・模範解答</strong>が届きます。弱点がはっきりするので、次で確実に伸ばせます。IT・エンジニア・コンサル・マーケティングなど、<strong>職種に合わせて</strong>評価します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="honest" class="manifesto">
+  <div class="wrap reveal">
+    <span class="eyebrow" style="color:#9fb6d8">Our promise</span>
+    <h2>売り込まない。<br>まず、整理する。</h2>
+    <p class="quote">RecruitFlowは、求人を売り込むサービスではありません。AIと一緒にキャリアを整理し、面接に備えるための、あなたのための道具です。<br>整理する中で「気になる」企業が見つかれば、将来的にお繋ぎすることも考えています。それまでも、その後も——<br>盛らない、急かさない、あなたのキャリア。</p>
+  </div>
+</section>
+
+<section id="price">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Pricing</span><h2 class="serif">まず、音声でキャリア整理。</h2><p>整理は無料。面接対策・ケース面接、そして定期的なマーケット情報はスタンダードで。</p></div>
+    <div class="price">
+      <div class="plan reveal">
+        <h3>フリー（お試し）</h3>
+        <div class="amt">¥0</div>
+        <div style="color:var(--muted);font-size:13px">まず、音声で整理する</div>
+        <ul>
+          <li>音声AIでキャリア整理</li>
+          <li>強み・志向をリアルタイムに可視化</li>
+          <li>市場価値の一次診断</li>
+          <li>整理結果を保存</li>
+        </ul>
+        <a class="btn btn-ghost" href="#">無料ではじめる</a>
+      </div>
+      <div class="plan feature reveal" style="animation-delay:.08s">
+        <div class="badge">いちばん人気</div>
+        <h3>スタンダード</h3>
+        <div class="amt">¥1,980<small>/月</small></div>
+        <div style="color:var(--muted);font-size:13px">対策も、マーケット情報も</div>
+        <ul>
+          <li><strong>面接対策・ケース面接</strong>（実質無制限）</li>
+          <li>詳細な評価レポート＋模範解答</li>
+          <li><strong>定期的な市場価値・マーケット情報</strong></li>
+          <li><strong>気になる企業に求人が出たら通知</strong></li>
+          <li>正直なマッチング（フル）・いつでも続きから</li>
+        </ul>
+        <a class="btn btn-primary" href="#">スタンダードを始める</a>
+      </div>
+    </div>
+    <p class="fee-note">RecruitFlowは求人を売り込むサービスではありません。整理する中で興味のある企業が見つかれば、<strong>将来的にお繋ぎできるよう準備を進めています</strong>。当面はキャリア整理・面接対策のツールとしてご利用ください。</p>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--surface);border-top:1px solid var(--line2);">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">FAQ</span><h2 class="serif">よくある質問</h2></div>
+    <div class="faq">
+      <details class="reveal"><summary>普通のエージェントと何が違うの？</summary><p>エージェントは面談ありきで、紹介料が入る企業に誘導されがちです。RecruitFlowはまず「自分で使う道具」。AIと自分のペースで、市場価値と選択肢を把握できます。整理する中で興味のある企業があれば、将来的にお繋ぎすることも考えています。</p></details>
+      <details class="reveal"><summary>無料で使えますか？</summary><p>はい。<strong>音声でのキャリア整理は無料</strong>でお試しいただけます。面接対策・ケース面接、定期的なマーケット情報や求人通知をご利用の場合は、月額¥1,980のスタンダードへ。候補者側に費用が発生することはありません。</p></details>
+      <details class="reveal"><summary>転職を強制されませんか？</summary><p>されません。「必ず紹介できる」とは言いませんし、押し売りもしません。今は情報収集だけ、でもOK。準備が整った時に、あなたのペースで動けます。</p></details>
+      <details class="reveal"><summary>入力した情報は安全ですか？</summary><p>あなたの情報はクラウド上で安全に保管され、あなたの許可なく企業に共有されることはありません。まず一次スクリーニングはAIが行い、実際の打診は担当が確認してから進めます。</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap reveal">
+    <div class="box">
+      <span class="eyebrow">Start now</span>
+      <h2 style="margin:12px 0 14px">動きたい時に、動ける自分へ。</h2>
+      <p style="color:var(--ink2);max-width:520px;margin:0 auto 26px">まずは3分。AIと話して、あなたの価値と選択肢を見てみましょう。</p>
+      <a class="btn btn-primary" href="#price">無料でキャリアを整理する →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div class="brand" style="font-size:14px"><span class="logo"></span>RecruitFlow</div>
+    <div>盛らない、急かさない、あなたのキャリア。 · © RecruitFlow</div>
+  </div>
+</footer>
+
+</body>
+</html>
